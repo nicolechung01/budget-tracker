@@ -174,3 +174,4 @@ setInterval(updateRemainingBalance, 1000);
 function findExpenseObject(name) {
     return expenseObjects.find((object) => object.expenseName.textContent === name);
   }
+  
