@@ -282,8 +282,23 @@ h3 {
     font-size: 16px;
 }
 @media (max-width: 768px) {
+    .body {
+        padding: none;
+    }
+    .wrapper {
+        padding: 10px;
+        margin: 5px;
+        }
     .container {
         grid-template-columns: 1fr; /* Single column for mobile */
     }
-
+    .init-container {
+        display: block;
+    }
+    .button-container {
+        display: flex;
+    }
+    .add-expense-type {
+        margin-left: auto;
+    }
 }
