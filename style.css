@@ -75,7 +75,7 @@ h1 {
     padding: 3px 8px 3px 8px;
     border-radius: 8px;
     font-weight: 600;
-    font-size: 16px;
+    font-size: 18px;
 }
 .modal-content {
     position: absolute;
@@ -137,7 +137,7 @@ h1 {
     border-radius: 10px;
     font-weight: 700;
     margin-top: 10px;
-    font-size: 16px;
+    font-size: 18px;
 }
 .init-container {
     display: flex;
