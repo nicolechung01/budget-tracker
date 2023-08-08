@@ -21,8 +21,18 @@
                 <p id="modal-header">New Expense Type</p>
                 <button class="alignright" id="exit">&times;</button>
             </div>
-            <input type="modal-input" id="expense-name" placeholder="Enter New Expense Type">
-            <input type="modal-input" id="expense-budget" placeholder="Enter Expense Budget">
+            <input
+                type="modal-input"
+                id="expense-name"
+                placeholder="Enter New Expense Type"
+                autocomplete="off"
+                />
+            <input
+                type="modal-input"
+                id="expense-budget"
+                placeholder="Enter Expense Budget"                        
+                autocomplete="off"
+                />
             <button class="enter" id="enter">Enter</button>
         </div>
     </div>
@@ -76,11 +86,13 @@
                         type="text"
                         id="expense-type"
                         placeholder="Enter Expense Type"
+                        autocomplete="off"
                     />
                     <input
                         type="text"
                         id="expense-amount"
                         placeholder="Enter Expense Amount"
+                        autocomplete="off"
                     />
                     <button class="add"
                     id="add-expense">+ Add</button>

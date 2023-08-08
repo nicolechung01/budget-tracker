@@ -46,13 +46,19 @@ class ExpenseObject {
         this.expenseBalanceDisp = document.createElement("div");
         this.expenseBalanceDisp.classList.add("expense-balance-disp");
         this.ofBudget = document.createTextNode(this.balance);
-        this.ofBudgetContainer = document.createElement("div");        
-
+        this.ofBudgetContainer = document.createElement("div");
+        this.ofBudgetContainer.classList.add("of-budget-container");
+        this.remainBudget = document.createTextNode(this.budget);
+        this.remainBudgetContainer = document.createElement("div");
+        this.remainBudgetContainer.appendChild(this.remainBudget);
+        this.remainBudgetContainer.classList.add("remain-budget-container")
         this.headerContainer.appendChild(this.expenseName);
         this.headerContainer.appendChild(this.expenseBudget);
+        this.ofBudgetContainer.appendChild(this.expenseBalanceDisp);
         this.ofBudgetContainer.appendChild(this.ofBudget);
-        this.numbersContainer.appendChild(this.expenseBalanceDisp);
+        // this.numbersContainer.appendChild(this.expenseBalanceDisp);
         this.numbersContainer.appendChild(this.ofBudgetContainer);
+        this.numbersContainer.appendChild(this.remainBudgetContainer);
 
         this.expenseTypeContainer.appendChild(this.headerContainer);
         this.expenseTypeContainer.appendChild(this.progressBarContainer);
@@ -64,22 +70,22 @@ class ExpenseObject {
     }
     setExpenseBudget(budgetText, budgetVal) {
         this.budget = budgetVal;
-        this.expenseBudget.textContent = budgetText;
+        this.expenseBudget.textContent = "$" + budgetText;
     }
     updateBalance(num) {
         this.balance = this.balance + num;
-        console.log(`Balance updated to: ${this.balance}`);
-        console.log(`Budget updated to: ${this.budget}`);
-
     }
     setBalanceDisp(balance) {
-        this.expenseBalanceDisp.textContent = balance;
+        this.expenseBalanceDisp.textContent = "$" + balance;
     }
     updateBalanceDisp(newBalance) {
-        this.expenseBalanceDisp.textContent = newBalance;
+        this.expenseBalanceDisp.textContent =  "$" + newBalance;
+    }
+    updateRemainBudget(remaining) {
+        this.remainBudget.textContent = "$" + remaining + " Remaining";
     }
     setOfBudget(budget) {
-        this.ofBudget.textContent = "of " + budget;
+        this.ofBudget.textContent = "of $" + budget;
     }
     updateProgressBar() {
         const percentage = (this.balance / this.budget) * 100;
@@ -99,7 +105,7 @@ incomeAmountButton.addEventListener('click', function() {
     } else {
         incomeError.classList.add("hide");
         startBalance = startBalance + parseFloat(incomeAmount.value);
-        startBalanceDisp.innerHTML = startBalance;
+        startBalanceDisp.innerHTML = "$" + startBalance;
         document.getElementById('income-amount').value = ''
     }
 })
@@ -114,14 +120,14 @@ expenseAmountButton.addEventListener('click', function(){
         expenseTypeError.classList.add("hide");
         expenseAmountError.classList.add("hide");
         expenseTotal = expenseTotal + parseFloat(document.getElementById('expense-amount').value);
-        expenseTotalDisp.innerHTML = expenseTotal;
-
+        expenseTotalDisp.innerHTML = "$" + expenseTotal;
         const targetObj = findExpenseObject(expenseType.value);
         const addToBalance = parseFloat(document.getElementById('expense-amount').value);
         targetObj.updateBalance(addToBalance);
         targetObj.updateProgressBar();
         targetObj.updateBalanceDisp(targetObj.balance.toString());
-
+        const remainingBudget = targetObj.budget - targetObj.balance;
+        targetObj.updateRemainBudget(remainingBudget.toString());
         document.getElementById('expense-type').value = ''
         document.getElementById('expense-amount').value = ''
     }
@@ -139,7 +145,6 @@ enterButton.addEventListener('click', function() {
     instructions.style.color = 'rgba(225, 225, 225, 0)';
     const name = expenseNameField.value;
     expenseTypes.add(name);
-
     const budgetText = expenseBudgetField.value;
     const budgetVal = parseFloat(expenseBudgetField.value);
     const expenseObject = new ExpenseObject();
@@ -149,29 +154,20 @@ enterButton.addEventListener('click', function() {
     expenseObject.setExpenseBudget(budgetText, budgetVal);
     expenseObject.setOfBudget(budgetText);
     expenseObject.setBalanceDisp(expenseObject.balance);
+    const remainingBudget = expenseObject.budget - expenseObject.balance;
+    expenseObject.updateRemainBudget(remainingBudget.toString());
 
     list.appendChild(expenseObject.expenseTypeContainer);
-
-    // const object = new ExpenseObject();
-    // const expenseNameVal = expenseNameField.value;
-    // object.setExpenseName(expenseNameVal);
-    // object.setExpenseBudget(expenseBudgetField.value);
-    // expenseBalance = 0.00;
-    // object.setBalanceDisp(expenseBalance);
-    // object.setOfBudget(expenseBudgetField.value);
-    
-    // list.appendChild(object.expenseTypeContainer);
 
     expenseNameField.value = '';
     expenseBudgetField.value = '';
 })
 function updateRemainingBalance() {
     let remainBalance = startBalance - expenseTotal;
-    remainBalanceDisp.innerHTML = remainBalance;
+    remainBalanceDisp.innerHTML = "$" + remainBalance;
 }
 setInterval(updateRemainingBalance, 1000);
 
 function findExpenseObject(name) {
     return expenseObjects.find((object) => object.expenseName.textContent === name);
   }
-  
