@@ -98,7 +98,6 @@ class ExpenseObject {
     }
 }   
 
-
 incomeAmountButton.addEventListener('click', function() {
     if (incomeAmount.value == "" || incomeAmount.value < 0) {
         incomeError.classList.remove("hide");
@@ -171,3 +170,50 @@ setInterval(updateRemainingBalance, 1000);
 function findExpenseObject(name) {
     return expenseObjects.find((object) => object.expenseName.textContent === name);
   }
+
+  function setSessionItem(name, value) {
+    var mySession;
+    try {
+        mySession = JSON.parse(localStorage.getItem('mySession'));
+    } catch (e) {
+        console.log(e);
+        mySession = {};
+    }
+
+    mySession[name] = value;
+
+    localStorage.setItem('mySession', JSON.stringify(mySession)); // Store updated session object
+}
+
+function getSessionItem(name) {
+    var mySession = localStorage.getItem('mySession');
+    if (mySession) {
+        try {
+            mySession = JSON.parse(mySession); // Parse the stored session object
+            return mySession[name];
+        } catch (e) {
+            console.log(e);
+        }
+    }
+}
+
+function restoreSession(data) {
+    for (var x in data) {
+        // Use saved data to set values as needed
+        console.log(x, data[x]);
+    }
+}
+
+window.addEventListener('load', function(e) {
+    var mySession = localStorage.getItem('mySession');
+    if (!mySession) {
+        localStorage.setItem('mySession', '{}');
+    } else {
+        try {
+            mySession = JSON.parse(mySession);
+        } catch (e) {
+            console.log(e);
+            mySession = {};
+        }
+    }
+})
