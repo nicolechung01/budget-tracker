@@ -59,6 +59,7 @@ h1 {
     height: 20px;
     font-size: 22px;
     padding-bottom: 2px;
+    padding-left: 1px;
 }
 #modal-header {
     font-weight: 600;
@@ -225,6 +226,7 @@ h1 {
     font-size: 22px;
     padding: 3px;
     padding-bottom: 4px;
+    padding-left: 1px;
 }
 .totals-window {
     width: 100%;
