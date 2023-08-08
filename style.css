@@ -301,4 +301,13 @@ h3 {
         margin-left: auto;
         margin-top: 10px;
     }
+    .add {
+        font-size:large;
+    }
+    .modal-content {
+        width: 90%;
+    }
+    .enter {
+        font-size: large;
+    }
 }
