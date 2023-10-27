@@ -7,3 +7,8 @@ It also allows you to track overall totals including total income, total expense
 
 # Implementation
 ![](/assets./interface.png)
+
+# Demo
+https://github.com/nicolechung01/budget-tracker/assets/131033188/f634e824-789e-4672-9c9d-e87027ab9fb3
+
+
